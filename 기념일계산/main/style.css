@@ -18,6 +18,11 @@ body {
   
 }
 
+button {
+    cursor: pointer;
+    border: none;
+}
+
 .wrapper {
     width: 100%;
     height: 100vh;
@@ -106,14 +111,15 @@ main .add-txt {
 }
 
 .white-bg{
-    width: 40%;
+    box-sizing: border-box;
+    width: 360px;
     position: fixed;
     background-color: #ffffff;
     opacity: 1 ;
     top: 0;
     bottom: 0;
     right: 0;
-    padding: 35px 15px;
+    padding: 35px 35px;
 }
 
 .white-bg h2{
@@ -124,7 +130,7 @@ main .add-txt {
 }
 
 .select-section{
-    display: flex;
+  
 }
 
 .select-section.is-none {
@@ -149,4 +155,40 @@ main .add-txt {
 
 .couple.is-active{
     display: block;
+}
+
+#couple-form {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.couple h2{
+    color: var(--main-color);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+.couple h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.couple input {
+    margin: 10px 0;
+    padding: 5px;
+    border-width: 0 0 2px;
+}
+
+.couple input:focus {
+    outline: none;
+}
+
+
+#couple-submit {
+    margin-top: 50px;
+    padding: 5px;
+    border: none;
+    background-color: var(--main-color);
+    border-radius: 8px;
 }
