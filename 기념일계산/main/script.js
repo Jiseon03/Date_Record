@@ -21,9 +21,26 @@ coupleBtn.addEventListener('click',function(){
 //커플 날짜 제출 시
 let coupleSubmitBtn = document.getElementById('couple-submit');
 let addTxt = document.querySelector('.add-txt');
-let addDday = document.querySelector('.add-D-day'); 
+let addDday = document.querySelector('.add-D-day');
+let coupleName = document.getElementById('couple-name');
+let coupleDate = document.getElementById('couple-date');
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
+    console.log(coupleDate.value);
     addTxt.innerHTML = '';
-    addDday.insertAdjacentHTML('beforeend',`<div>안녕하세야</div>`);
+    addDday.insertAdjacentHTML('beforeend',`<div>${coupleName.value}</div>
+                                            <div>${coupleDate.value}</div>`);
 })
+
+
+function 날짜계산(num){
+    let now1 = new Date();	// 현재 날짜 및 시간
+    let fulldate = new Date(now1.setDate(now1.getDate() + num));
+    let month = fulldate.getMonth()+1;
+    let date = fulldate.getDate();
+  
+    return ` ${num}일 후는 ${month}월 ${date}일 입니다.`;
+    
+  }
+  
+  console.log(날짜계산(100));
