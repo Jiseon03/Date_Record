@@ -23,13 +23,18 @@ let coupleSubmitBtn = document.getElementById('couple-submit');
 let addTxt = document.querySelector('.add-txt');
 let addDday = document.querySelector('.add-D-day');
 let coupleName = document.getElementById('couple-name');
+let coupleYear = document.getElementById('couple-year');
+let coupleMonth = document.getElementById('couple-month');
 let coupleDate = document.getElementById('couple-date');
+
+
+
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    console.log(coupleDate.value);
     addTxt.innerHTML = '';
     addDday.insertAdjacentHTML('beforeend',`<div>${coupleName.value}</div>
-                                            <div>${coupleDate.value}</div>`);
+                                            <div>${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>`);
+    
 })
 
 
