@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디데이</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- 아이콘 -->
+    <script src="https://kit.fontawesome.com/9457c1c408.js" crossorigin="anonymous"></script>
+    <!-- 폰트적용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+</head>
+<body class="gowun-dodum-regular">
+    <div class="wrapper">
+        <header class="global-header">
+            <h1 class="logo">
+                <i class="fa-regular fa-calendar"></i>
+                <p>MAKE MY DAY</p>
+            </h1>
+        </header>
+        <main>
+            <p class="add-txt">새로운 디데이를 추가해보세요.</p>
+            <div class="add-D-day"></div>
+           
+        </main>
+    </div>
+    <button id="add-btn">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+    <section class="which-day-popup">
+        <div class="black-bg"></div>
+        <div class="white-bg">
+            <h2>어떤 디데이 인가요?</h2>
+            <div class="select-section">
+                <div id="couple-btn">커플</div>
+                <div>시험</div>
+            </div>
+            <div class="couple">
+                <form action="" id="couple-form">
+                    <h3>처음 만난 날짜를 골라주세요</h3>
+                    <select name="" id="">
+                        <option value="">2023</option>
+                        <option value="">2024</option>
+                    </select>년
+                    <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                    </select>월
+                    <select name="" id="">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                    </select>일
+                    <button type="submit" id="couple-submit">제출하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
