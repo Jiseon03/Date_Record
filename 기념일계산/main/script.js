@@ -23,20 +23,35 @@ let coupleSubmitBtn = document.getElementById('couple-submit');
 let addTxt = document.querySelector('.add-txt');
 let addDday = document.querySelector('.add-D-day');
 let coupleName = document.getElementById('couple-name');
-let coupleYear = document.getElementById('couple-year');
-let coupleMonth = document.getElementById('couple-month');
-let coupleDate = document.getElementById('couple-date');
+let inputYear = document.getElementById('couple-year');
+let inputMonth = document.getElementById('couple-month');
+let inputDate = document.getElementById('couple-date');
 
 
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
+    let inputYearNum = Number(inputYear);
     addTxt.innerHTML = '';
+    
+    
+    let asd = `${inputYear.value}-${inputMonth.value}-${inputDate.value}`;
+    let coupleDay = new Date(asd);
+    console.log(coupleDay);
+    let today  = new Date();
+    console.log(today);
+    let diffDate = coupleDay.getTime() - today.getTime();
+    let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
+    console.log(diffDateResult);
+
     addDday.insertAdjacentHTML('beforeend',`<div>${coupleName.value}</div>
-                                            <div>${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>`);
+        <div>${inputYear.value}년 ${inputMonth.value}월 ${inputDate.value}일</div>
+        <div>만난지 ${diffDateResult}일 째</div>`);
+   
     
 })
 
+  
 
 function 날짜계산(num){
     let now1 = new Date();	// 현재 날짜 및 시간
