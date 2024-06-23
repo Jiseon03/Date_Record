@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>디데이</title>
+    <title>MAKE MY DAY</title>
     <link rel="stylesheet" href="./style.css">
-    <!-- 아이콘 -->
+    <!--아이콘 -->
     <script src="https://kit.fontawesome.com/9457c1c408.js" crossorigin="anonymous"></script>
-    <!-- 폰트적용 -->
+    <!--폰트적용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <!--favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../asset/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../asset/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../asset/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body class="gowun-dodum-regular">
     <div class="wrapper">
         <header class="global-header">
             <h1 class="logo">
-                <i class="fa-regular fa-calendar"></i>
+                <img src="../asset/images/로고.png" alt="">
                 <p>MAKE MY DAY</p>
             </h1>
         </header>
@@ -43,10 +51,10 @@
                     <h3>기념일 제목을 정해주세요</h3>
                     <input type="text" name="" id="couple-name">
                     <h3>처음 만난 날짜를 골라주세요</h3>
-                    <div class="couple-date">
-                        <input type="text" name="" id="couple-date-year">년
-                        <input type="text" name="" id="couple-date-month">월
-                        <input type="text" name="" id="couple-date-date">일
+                    <div class="couple-date-wrap">
+                        <input type="text" name="" id="couple-year">년
+                        <input type="text" name="" id="couple-month">월
+                        <input type="text" name="" id="couple-date">일
                     </div>
                     <button type="submit" id="couple-submit">제출하기</button>
                 </form>
