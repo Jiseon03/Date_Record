@@ -8,6 +8,8 @@
 
 :root {
     --main-color : #F29F80;
+    --gnb-color : #ffffff;
+    --bg-color : #f5f5f5;
 }
 
 body {
@@ -32,13 +34,13 @@ input {
 .wrapper {
     width: 100%;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--bg-color);
 }
 
 .global-header {
-    background-color: #ffffff;
+    background-color: var(--gnb-color);
     width: 100%;
-    height: 50px;
+    height: 65px;
     display: flex;
     align-items: center;
     padding: 5px 15px;
@@ -48,32 +50,70 @@ input {
 
 .logo {
     display: flex;
+    align-items: center;
 }
 
-.logo i {
-    display: block;
-    font-size: 24px;
-    padding-right: 10px;
+.logo img {
+    width: 50px;
+    margin-right: 5px;
 }
 
 .logo p {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
 }
 
 main {
     box-sizing: border-box;
     width: 100%;
-   
+    height: 630px;
     padding: 15px;
+    position: relative;
    
 }
 
 main .add-txt {
     text-align: center;
     font-size: 24px;
-    margin-top: 200px;
     font-weight: 700;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.card {
+    box-sizing: border-box;
+    width: 450px;
+    height: 120px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    padding: 20px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 3px 3px 10px 3px rgb(194, 193, 193);
+}
+
+.card-title{
+    display: flex;
+    align-items: center;
+}
+
+.card-name{
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    padding-right: 10px;
+}
+
+.card-day{
+    font-size: 12px;
+}
+
+.card-txt span{
+    font-weight: 700;
+    font-size: 15px;
 }
 
 #add-btn {
@@ -96,29 +136,27 @@ main .add-txt {
     font-size: 20px;
 }
 
-.which-day-popup{
-    display: none;
-}
 
-.which-day-popup.is-active {
-    display: block;
-}
-
-
-
-.black-bg{
+.popup-bg{
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #000;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 500ms ease-in-out;
 }
 
-.white-bg{
+.popup-bg.is-active {
+    visibility: visible;
+    opacity: 1;
+} 
+
+.popup{
     box-sizing: border-box;
-    width: 360px;
+    width: 400px;
     position: fixed;
     background-color: #ffffff;
     opacity: 1 ;
@@ -128,18 +166,18 @@ main .add-txt {
     padding: 35px 35px;
 }
 
-.white-bg h2{
+.popup h2{
     font-size: 24px;
     font-weight: 600;
     text-align: center;
     margin-bottom: 15px;
 }
 
-.select-section{
-  
+.select-section.is-active {
+    display: block;
 }
 
-.select-section.is-none {
+.select-section {
     display: none;
 }
 
@@ -180,27 +218,30 @@ main .add-txt {
     margin: 10px 0;
 }
 
-.couple-date {
+.couple-date-wrap {
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
-.couple-date input {
+.couple-date-wrap input {
     width: 40px;
     margin-right: 5px;
 }
-
-
 
 .couple input:focus {
     outline: none;
 }
 
 #couple-submit {
+    width: 100%;
+    font-size: 15px;
     margin-top: 50px;
     padding: 5px;
     border: none;
     background-color: var(--main-color);
+    color: #ffffff;
     border-radius: 8px;
 }
