@@ -1,12 +1,15 @@
 //팝업창 열고닫기
 let addBtn = document.getElementById('add-btn');
-let popup = document.querySelector('.which-day-popup');
-let blackBg = document.querySelector('.black-bg');
+let popupBg = document.querySelector('.popup-bg');
 addBtn.addEventListener('click',function(){
-    popup.classList.add("is-active")
+    popupBg.classList.add("is-active")
 })
-blackBg.addEventListener('click',function(){
-    popup.classList.remove("is-active")
+popupBg.addEventListener('click',function(e){
+    //이벤트 버블링 방지
+    if(e.target == popupBg){
+        popupBg.classList.remove("is-active")
+    }
+   
 })
 
 //커플 버튼 눌렀을 때 날짜 선택 보여주기
@@ -31,27 +34,20 @@ let inputDate = document.getElementById('couple-date');
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    let inputYearNum = Number(inputYear);
-    addTxt.innerHTML = '';
-    
     
     let asd = `${inputYear.value}-${inputMonth.value}-${inputDate.value}`;
     let coupleDay = new Date(asd);
-    console.log(coupleDay);
     let today  = new Date();
-    console.log(today);
     let diffDate = coupleDay.getTime() - today.getTime();
     let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
-    console.log(diffDateResult);
 
+    addTxt.innerHTML = '';
     addDday.insertAdjacentHTML('beforeend',`<div>${coupleName.value}</div>
         <div>${inputYear.value}년 ${inputMonth.value}월 ${inputDate.value}일</div>
         <div>만난지 ${diffDateResult}일 째</div>`);
-   
     
 })
 
-  
 
 function 날짜계산(num){
     let now1 = new Date();	// 현재 날짜 및 시간
