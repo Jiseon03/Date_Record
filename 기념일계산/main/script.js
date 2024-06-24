@@ -1,50 +1,73 @@
+//is-active 클래스를 이용해 컨텐츠를 보여주고 숨겨주는 함수
+function show(content) {
+    content.classList.add("is-active");
+}
+function remove(content) {
+    content.classList.remove("is-active");
+}
+
 //팝업창 열고닫기
 let addBtn = document.getElementById('add-btn');
 let popupBg = document.querySelector('.popup-bg');
 addBtn.addEventListener('click',function(){
-    popupBg.classList.add("is-active")
+    show(popupBg);
 })
 popupBg.addEventListener('click',function(e){
-    //이벤트 버블링 방지
+    //이벤트 버블링 방지 -> popupBg를 눌렀을 때만 실행
     if(e.target == popupBg){
-        popupBg.classList.remove("is-active")
+        remove(popupBg);
     }
-   
 })
 
-//커플 버튼 눌렀을 때 날짜 선택 보여주기
+//커플 버튼 눌렀을 때 커플 모달창 보여주기
 let selectSection = document.querySelector('.select-section')
 let coupleBtn = document.getElementById('couple-btn');
 let couple = document.querySelector('.couple')
 coupleBtn.addEventListener('click',function(){
-    couple.classList.add("is-active")
-    selectSection.classList.add('is-none');
+    show(couple);
+    remove(selectSection);
 })
 
-//커플 날짜 제출 시
-let coupleSubmitBtn = document.getElementById('couple-submit');
+//커플 모달창 입력 값 제출 시
 let addTxt = document.querySelector('.add-txt');
-let addDday = document.querySelector('.add-D-day');
+let card = document.querySelector('.card');
 let coupleName = document.getElementById('couple-name');
-let inputYear = document.getElementById('couple-year');
-let inputMonth = document.getElementById('couple-month');
-let inputDate = document.getElementById('couple-date');
+let coupleYear = document.getElementById('couple-year');
+let coupleMonth = document.getElementById('couple-month');
+let coupleDate = document.getElementById('couple-date');
+let coupleSubmitBtn = document.getElementById('couple-submit');
+//오늘 날짜
+let today  = new Date();
 
+//년,월,일 입력한 값을 받아서 Date 객체 생성
+function createDate(year,month,date){
+    let inputDate = `${year.value}-${month.value}-${date.value}`;
+    let newDate = new Date(inputDate);
+    return newDate;
+}
 
+//date 객체 2개를 받아서 날짜간 간격 계산하기
+function diffDate(day1,day2){
+    let diffDate = day1.getTime() - day2.getTime();
+    let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
+    return diffDateResult;
+}
+
+//card에 내용 추가
+function addContent(content){
+    addTxt.innerHTML = '';
+    card.insertAdjacentHTML('beforeend',content);
+}
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    
-    let asd = `${inputYear.value}-${inputMonth.value}-${inputDate.value}`;
-    let coupleDay = new Date(asd);
-    let today  = new Date();
-    let diffDate = coupleDay.getTime() - today.getTime();
-    let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
+    let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
 
-    addTxt.innerHTML = '';
-    addDday.insertAdjacentHTML('beforeend',`<div>${coupleName.value}</div>
-        <div>${inputYear.value}년 ${inputMonth.value}월 ${inputDate.value}일</div>
-        <div>만난지 ${diffDateResult}일 째</div>`);
+    let cardContent = `<div>${coupleName.value}</div>
+                     <div>${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
+                     <div>만난지 ${diffDate(coupleDay,today)}일 째</div>`
+
+    addContent(cardContent);
     
 })
 
@@ -59,4 +82,3 @@ function 날짜계산(num){
     
   }
   
-  console.log(날짜계산(100));
