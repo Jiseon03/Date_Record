@@ -30,37 +30,40 @@
         </header>
         <main>
             <p class="add-txt">새로운 디데이를 추가해보세요.</p>
-            <div class="add-D-day"></div>
-           
+            
+            
         </main>
     </div>
     <button id="add-btn">
         <i class="fa-solid fa-plus"></i>
     </button>
-    <section class="which-day-popup">
-        <div class="black-bg"></div>
-        <div class="white-bg">
-            <div class="select-section">
+
+    
+    <div class="popup-bg">
+        <div class="popup">
+            <div class="select-section is-active">
                 <h2>어떤 디데이 인가요?</h2>
                 <div id="couple-btn">커플</div>
                 <div>시험</div>
             </div>
+
             <div class="couple">
                 <form action="" id="couple-form">
-                    <h2>커플</h2>
-                    <h3>기념일 제목을 정해주세요</h3>
-                    <input type="text" name="" id="couple-name">
-                    <h3>처음 만난 날짜를 골라주세요</h3>
-                    <div class="couple-date-wrap">
-                        <input type="text" name="" id="couple-year">년
-                        <input type="text" name="" id="couple-month">월
-                        <input type="text" name="" id="couple-date">일
-                    </div>
-                    <button type="submit" id="couple-submit">제출하기</button>
+                        <h2>커플</h2>
+                        <h3>기념일 제목을 정해주세요</h3>
+                        <input type="text" name="" id="couple-name">
+                        <h3>처음 만난 날짜를 골라주세요</h3>
+                        <div class="couple-date-wrap">
+                            <div class="cy"><input type="text" name="" id="couple-year">년</div>
+                            <div class="cm"><input type="text" name="" id="couple-month">월</div>
+                            <div class="cd"><input type="text" name="" id="couple-date">일</div>
+                        </div>
+                        <button type="submit" id="couple-submit">제출하기</button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+  
 
 
     <script src="./script.js"></script>
