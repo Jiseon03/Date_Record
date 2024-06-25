@@ -62,12 +62,17 @@ function addContent(content){
     addTxt.innerHTML = '';
     main.insertAdjacentHTML('beforeend',content);
 }
-
-
+//let 모두작성 = (coupleName.value != 0) && (coupleYear.value != 0) && (coupleMonth.value != 0) && (coupleDate.value != 0);
+//let 모두숫자 = (isNaN(coupleYear.value)==false) && (isNaN(coupleMonth.value)==false) && (isNaN(coupleDate.value)==false);
+//isNaN -> 숫자이면 'false'반환 숫자가 아닌 다른 것 'true'반환
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
+    console.log(isNaN(coupleYear.value));
+    console.log(isNaN(coupleMonth.value));
+    console.log(isNaN(coupleDate.value));
+    
     //네가지 입력칸을 모두 작성했을 경우
-    if(coupleName.value!=0 && coupleYear.value!=0 &&coupleMonth.value!=0 && coupleDate.value!=0){
+    if((coupleName.value != 0) && (coupleYear.value != 0) && (coupleMonth.value != 0) && (coupleDate.value != 0)&&(isNaN(coupleYear.value)==false) && (isNaN(coupleMonth.value)==false) && (isNaN(coupleDate.value)==false)){
         remove(coupleNameWarn);
         remove(coupleDateWarn);
         
@@ -80,25 +85,28 @@ coupleSubmitBtn.addEventListener('click',function(e){
                             <p class="card-txt">만난지 <span>${diffDate(coupleDay,today)}</span>일 째♥</p>
                         </div>`
         addContent(cardContent);
-       
     }else{//네가지 중 한가지라도 작성하지 않았을 경우
 
-        if(coupleName.value == 0 && (coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0)){//둘 다 작성 안했을 때 (제목, 날짜)
-            show(coupleNameWarn);
-            show(coupleDateWarn);
-        }else if(coupleName.value == 0){//제목만 입력 안했을 떄
+        
+        if(coupleName.value == 0){//제목을 입력 안했을 떄
             show(coupleNameWarn);
         }
-        else if(coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0){//날짜만 입력 안했을 때(년,월,일 중 하나라도)
+        else{
+            remove(coupleNameWarn);
+        }
+
+        if(coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0){//날짜만 입력 안했을 때(년,월,일 중 하나라도)
             show(coupleDateWarn);
+             
+        }
+
+        if((isNaN(coupleYear.value))||(isNaN(coupleMonth.value))||(isNaN)(coupleDate.value)){//년월일이 숫자로 작성되지 않은 경우
+            show(numberWarn);
+        }else{
+            remove(numberWarn)
         }
     }
-     //isNaN -> 숫자이면 'false'반환 숫자가 아닌 다른 것 'true'반환
-    if((isNaN(coupleYear.value))||(isNaN(coupleMonth.value))||(isNaN(coupleDate.value))){//년월일이 숫자로 작성되지 않은 경우
-        show(numberWarn);
-    }else{
-        remove(numberWarn)
-    }
+    
     
     
     // for(i=100;i<1001;i+=100){
