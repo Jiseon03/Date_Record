@@ -36,6 +36,9 @@ let coupleYear = document.getElementById('couple-year');
 let coupleMonth = document.getElementById('couple-month');
 let coupleDate = document.getElementById('couple-date');
 let coupleSubmitBtn = document.getElementById('couple-submit');
+let coupleNameWarn = document.querySelector('.couple-name-warn');
+let coupleDateWarn = document.querySelector('.couple-date-warn');
+let numberWarn = document.querySelector('.number-warn');
 //오늘 날짜
 let today  = new Date();
 
@@ -53,32 +56,77 @@ function diffDate(day1,day2){
     return diffDateResult;
 }
 
+let main = document.querySelector('main');
 //card에 내용 추가
 function addContent(content){
     addTxt.innerHTML = '';
-    card.insertAdjacentHTML('beforeend',content);
+    main.insertAdjacentHTML('beforeend',content);
 }
+
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+    //네가지 입력칸을 모두 작성했을 경우
+    if(coupleName.value!=0 && coupleYear.value!=0 &&coupleMonth.value!=0 && coupleDate.value!=0){
+        remove(coupleNameWarn);
+        remove(coupleDateWarn);
+        
+        let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+        let cardContent = `<div class="card">
+                            <div class = card-title>
+                                <h1 class="card-name">${coupleName.value}</h1>
+                                <div class="card-day">${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
+                            </div>
+                            <p class="card-txt">만난지 <span>${diffDate(coupleDay,today)}</span>일 째♥</p>
+                        </div>`
+        addContent(cardContent);
+       
+    }else{//네가지 중 한가지라도 작성하지 않았을 경우
 
-    let cardContent = `<div>${coupleName.value}</div>
-                     <div>${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
-                     <div>만난지 ${diffDate(coupleDay,today)}일 째</div>`
-
-    addContent(cardContent);
+        if(coupleName.value == 0 && (coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0)){//둘 다 작성 안했을 때 (제목, 날짜)
+            show(coupleNameWarn);
+            show(coupleDateWarn);
+        }else if(coupleName.value == 0){//제목만 입력 안했을 떄
+            show(coupleNameWarn);
+        }
+        else if(coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0){//날짜만 입력 안했을 때(년,월,일 중 하나라도)
+            show(coupleDateWarn);
+        }
+    }
+     //isNaN -> 숫자이면 'false'반환 숫자가 아닌 다른 것 'true'반환
+    if((isNaN(coupleYear.value))||(isNaN(coupleMonth.value))||(isNaN(coupleDate.value))){//년월일이 숫자로 작성되지 않은 경우
+        show(numberWarn);
+    }else{
+        remove(numberWarn)
+    }
+    
+    
+    // for(i=100;i<1001;i+=100){
+    //     console.log(날짜계산(coupleDay,i));
+    //   }
     
 })
 
-
-function 날짜계산(num){
-    let now1 = new Date();	// 현재 날짜 및 시간
-    let fulldate = new Date(now1.setDate(now1.getDate() + num));
+function 날짜계산(anniver,num){
+    let now1 = new Date(anniver);	// 현재 날짜 및 시간
+    let fulldate = new Date(now1.setDate(now1.getDate() + (num-1)));
+    let year = fulldate.getFullYear();
     let month = fulldate.getMonth()+1;
     let date = fulldate.getDate();
   
-    return ` ${num}일 후는 ${month}월 ${date}일 입니다.`;
-    
-  }
+    return ` 만난지 ${num}일 째 : ${year}년 ${month}월 ${date}일 입니다.`;
+}
   
+
+//   function 날짜계산(num){
+//     let now1 = new Date();	// 현재 날짜 및 시간
+//     let fulldate = new Date(now1.setDate(now1.getDate() + num));
+//     let month = fulldate.getMonth()+1;
+//     let date = fulldate.getDate();
+  
+    //return ` ${num}일 후는 ${month}월 ${date}일 입니다.`;
+    
+//   }
+
+
+
