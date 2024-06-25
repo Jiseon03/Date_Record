@@ -67,7 +67,7 @@ main {
     box-sizing: border-box;
     width: 100%;
     height: 630px;
-    padding: 15px;
+    padding: 20px;
     position: relative;
    
 }
@@ -77,8 +77,9 @@ main .add-txt {
     font-size: 24px;
     font-weight: 700;
     position: absolute;
-    top: 40%;
-    left: 40%;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .card {
@@ -180,15 +181,20 @@ main .add-txt {
 .select-section {
     display: none;
 }
-
-.select-section div{
+.select-btn-wrap{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.select-btn-wrap div{
     box-sizing: border-box;
-    width: 130px;
-    height: 130px;
+    width: 125px;
+    height: 125px;
     border-radius: 12px;
     background-color: var(--main-color);
-    margin-right: 10px;
+    margin-right: 15px;
     padding: 15px;
+    font-size: 18px;
     text-align: center;
     cursor: pointer;
 }
@@ -237,11 +243,53 @@ main .add-txt {
 
 #couple-submit {
     width: 100%;
+    height: 40px;
     font-size: 15px;
     margin-top: 50px;
     padding: 5px;
     border: none;
     background-color: var(--main-color);
     color: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px;
+    transition: all 300ms;
+   
+}
+
+#couple-submit:hover{
+    transform: scale(1.04);
+    box-shadow:
+        -7px -7px 20px 0px #fff9,
+        -4px -4px 5px 0px #fff9,
+        7px 7px 20px 0px #0002,
+        4px 4px 5px 0px #0001;
+}
+
+.warn-txt{
+    font-size: 13px;
+    font-weight: bold;
+    color: crimson;
+}
+
+.couple-name-warn{
+    display: none;
+}
+
+.couple-name-warn.is-active {
+    display: block;
+}
+
+.couple-date-warn{
+    display: none;
+}
+
+.couple-date-warn.is-active {
+    display: block;
+}
+
+.number-warn{
+    display: none;
+}
+
+.number-warn.is-active {
+    display: block;
 }

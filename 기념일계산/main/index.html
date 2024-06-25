@@ -43,8 +43,10 @@
         <div class="popup">
             <div class="select-section is-active">
                 <h2>어떤 디데이 인가요?</h2>
-                <div id="couple-btn">커플</div>
-                <div>시험</div>
+                <div class="select-btn-wrap">
+                    <div id="couple-btn">커플</div>
+                    <div>시험</div>
+                </div>
             </div>
 
             <div class="couple">
@@ -52,12 +54,15 @@
                         <h2>커플</h2>
                         <h3>기념일 제목을 정해주세요</h3>
                         <input type="text" name="" id="couple-name">
+                        <p class="warn-txt couple-name-warn">기념일 제목을 반드시 입력해주세요</p>
                         <h3>처음 만난 날짜를 골라주세요</h3>
                         <div class="couple-date-wrap">
                             <div class="cy"><input type="text" name="" id="couple-year">년</div>
                             <div class="cm"><input type="text" name="" id="couple-month">월</div>
                             <div class="cd"><input type="text" name="" id="couple-date">일</div>
                         </div>
+                        <p class="warn-txt couple-date-warn">년, 월, 일을 반드시 모두 입력해주세요</p>
+                        <p class="warn-txt number-warn">년, 월, 일은 숫자로 입력해주세요</p>
                         <button type="submit" id="couple-submit">제출하기</button>
                 </form>
             </div>
