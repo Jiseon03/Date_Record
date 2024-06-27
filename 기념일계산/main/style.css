@@ -286,10 +286,3 @@ main .add-txt {
     display: block;
 }
 
-.number-warn{
-    display: none;
-}
-
-.number-warn.is-active {
-    display: block;
-}
