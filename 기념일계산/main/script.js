@@ -37,32 +37,37 @@ let coupleMonth = document.getElementById('couple-month');
 let coupleDate = document.getElementById('couple-date');
 let coupleSubmitBtn = document.getElementById('couple-submit');
 let coupleNameWarn = document.querySelector('.couple-name-warn');
-let monthSelect = document.querySelector('.month-Select')
+let coupleDateWarn = document.querySelector('.couple-date-warn');
+
 
 //오늘 날짜
 let today  = new Date();
 let currentYear = today.getFullYear();
+let currentMonth = today.getMonth()+1;
+let currentDate = today.getDate();
+
 
 //년, 월, 일 선택 옵션 추가하기
 for(let i=currentYear;i>=1920;i--){
     coupleYear.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)
 }
 for(let i=1;i<=12;i++){
-    coupleMonth.insertAdjacentHTML('beforeend',`<option value="${i}" class="month-Select">${i}</option>`) 
+        coupleMonth.insertAdjacentHTML('beforeend',`<option value="${i}" class="month-Select">${i}</option>`) 
+        let monthSelect = document.querySelectorAll('.month-Select');
 }
+   
 
 //윤년 구현
 //월마다 일수가 다른것 구현
 coupleMonth.addEventListener('click',function(){
-    console.log(coupleYear.value);
     let cy = coupleYear.value;
-    let cv = coupleMonth.value;
-    if(cv == 1 || cv==3 || cv==5 || cv==7 || cv==8 || cv==10 || cv==12){
-        console.log('yes');
+    let cm = coupleMonth.value;
+    if(cm == 1 || cm==3 || cm==5 || cm==7 || cm==8 || cm==10 || cm==12){
         coupleDate.innerHTML = '';
         for(let i=1;i<=31;i++){
-                coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
-    }else if(cv==4|| cv==6 || cv==9 || cv==11){
+                coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)
+            };
+    }else if(cm==4|| cm==6 || cm==9 || cm==11){
         coupleDate.innerHTML = '';
         for(let i=1;i<=30;i++){
             coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
@@ -82,7 +87,6 @@ coupleMonth.addEventListener('click',function(){
 
 
 
-console.log(monthSelect);
 //년,월,일 입력한 값을 받아서 Date 객체 생성
 function createDate(year,month,date){
     let inputDate = `${year.value}-${month.value}-${date.value}`;
@@ -93,7 +97,8 @@ function createDate(year,month,date){
 //date 객체 2개를 받아서 날짜간 간격 계산하기
 function diffDate(day1,day2){
     let diffDate = day1.getTime() - day2.getTime();
-    let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
+    // let diffDateResult = Math.ceil(Math.abs(diffDate / (1000 * 60 * 60 * 24)));
+    let diffDateResult = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
     return diffDateResult;
 }
 
@@ -106,22 +111,26 @@ function addContent(content){
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    if(coupleName.value == ''){
-        show(coupleNameWarn);   //입력 유효성 검사
-    }else{
-        remove(coupleNameWarn);
-        let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
-        let cardContent = `<div class="card">
+    let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+    let cardContent = `<div class="card">
                             <div class = card-title>
                                 <h1 class="card-name">${coupleName.value}</h1>
                                 <div class="card-day">${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
                             </div>
-                            <p class="card-txt">만난지 <span>${diffDate(coupleDay,today)}</span>일 째♥</p>
+                            <p class="card-txt">만난지 <span>${diffDate(today,coupleDay)}</span>일 째♥</p>
                         </div>`
+    if(coupleName.value == ''){
+        show(coupleNameWarn);   //입력 유효성 검사
+    }else if(diffDate(today,coupleDay)<0){
+        show(coupleDateWarn);
+    }
+    else{
+        remove(coupleNameWarn);
+        remove(coupleDateWarn);
         addContent(cardContent);
     }
     
-    
+    //만약 diffDate(today,coupleDay) 가 음수면 경고 (미래일때)
     
     // for(i=100;i<1001;i+=100){
     //     console.log(날짜계산(coupleDay,i));
