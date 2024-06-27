@@ -38,10 +38,52 @@ let coupleDate = document.getElementById('couple-date');
 let coupleSubmitBtn = document.getElementById('couple-submit');
 let coupleNameWarn = document.querySelector('.couple-name-warn');
 let coupleDateWarn = document.querySelector('.couple-date-warn');
-let numberWarn = document.querySelector('.number-warn');
+let monthSelect = document.querySelector('.month-Select')
+
 //오늘 날짜
 let today  = new Date();
+let currentYear = today.getFullYear();
 
+//년, 월, 일 선택 옵션 추가하기
+for(let i=currentYear;i>=1920;i--){
+    coupleYear.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)
+}
+for(let i=1;i<=12;i++){
+    coupleMonth.insertAdjacentHTML('beforeend',`<option value="${i}" class="month-Select">${i}</option>`) 
+}
+
+//윤년 구현
+//월마다 일수가 다른것 구현
+coupleMonth.addEventListener('click',function(){
+    console.log(coupleYear.value);
+    let cy = coupleYear.value;
+    let cv = coupleMonth.value;
+    if(cv == 1 || cv==3 || cv==5 || cv==7 || cv==8 || cv==10 || cv==12){
+        console.log('yes');
+        coupleDate.innerHTML = '';
+        for(let i=1;i<=31;i++){
+                coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+    }else if(cv==4|| cv==6 || cv==9 || cv==11){
+        coupleDate.innerHTML = '';
+        for(let i=1;i<=30;i++){
+            coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+    }else{
+        coupleDate.innerHTML = '';
+        if(cy%4==0){
+            for(let i=1;i<=29;i++){
+                    coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+            }else{
+                for(let i=1;i<=28;i++){
+                    coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+            }
+        
+    }
+
+})
+
+    
+
+console.log(monthSelect);
 //년,월,일 입력한 값을 받아서 Date 객체 생성
 function createDate(year,month,date){
     let inputDate = `${year.value}-${month.value}-${date.value}`;
@@ -62,52 +104,19 @@ function addContent(content){
     addTxt.innerHTML = '';
     main.insertAdjacentHTML('beforeend',content);
 }
-//let 모두작성 = (coupleName.value != 0) && (coupleYear.value != 0) && (coupleMonth.value != 0) && (coupleDate.value != 0);
-//let 모두숫자 = (isNaN(coupleYear.value)==false) && (isNaN(coupleMonth.value)==false) && (isNaN(coupleDate.value)==false);
-//isNaN -> 숫자이면 'false'반환 숫자가 아닌 다른 것 'true'반환
+
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    console.log(isNaN(coupleYear.value));
-    console.log(isNaN(coupleMonth.value));
-    console.log(isNaN(coupleDate.value));
-    
-    //네가지 입력칸을 모두 작성했을 경우
-    if((coupleName.value != 0) && (coupleYear.value != 0) && (coupleMonth.value != 0) && (coupleDate.value != 0)&&(isNaN(coupleYear.value)==false) && (isNaN(coupleMonth.value)==false) && (isNaN(coupleDate.value)==false)){
-        remove(coupleNameWarn);
-        remove(coupleDateWarn);
-        
-        let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
-        let cardContent = `<div class="card">
+    console.log(coupleYear.value);
+    let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+    let cardContent = `<div class="card">
                             <div class = card-title>
                                 <h1 class="card-name">${coupleName.value}</h1>
                                 <div class="card-day">${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
                             </div>
                             <p class="card-txt">만난지 <span>${diffDate(coupleDay,today)}</span>일 째♥</p>
                         </div>`
-        addContent(cardContent);
-    }else{//네가지 중 한가지라도 작성하지 않았을 경우
-
-        
-        if(coupleName.value == 0){//제목을 입력 안했을 떄
-            show(coupleNameWarn);
-        }
-        else{
-            remove(coupleNameWarn);
-        }
-
-        if(coupleYear.value==0 || coupleMonth.value==0 || coupleDate.value==0){//날짜만 입력 안했을 때(년,월,일 중 하나라도)
-            show(coupleDateWarn);
-             
-        }
-
-        if((isNaN(coupleYear.value))||(isNaN(coupleMonth.value))||(isNaN)(coupleDate.value)){//년월일이 숫자로 작성되지 않은 경우
-            show(numberWarn);
-        }else{
-            remove(numberWarn)
-        }
-    }
-    
-    
+    addContent(cardContent);
     
     // for(i=100;i<1001;i+=100){
     //     console.log(날짜계산(coupleDay,i));
