@@ -37,7 +37,6 @@ let coupleMonth = document.getElementById('couple-month');
 let coupleDate = document.getElementById('couple-date');
 let coupleSubmitBtn = document.getElementById('couple-submit');
 let coupleNameWarn = document.querySelector('.couple-name-warn');
-let coupleDateWarn = document.querySelector('.couple-date-warn');
 let monthSelect = document.querySelector('.month-Select')
 
 //오늘 날짜
@@ -62,26 +61,26 @@ coupleMonth.addEventListener('click',function(){
         console.log('yes');
         coupleDate.innerHTML = '';
         for(let i=1;i<=31;i++){
-                coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+                coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
     }else if(cv==4|| cv==6 || cv==9 || cv==11){
         coupleDate.innerHTML = '';
         for(let i=1;i<=30;i++){
-            coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+            coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
     }else{
         coupleDate.innerHTML = '';
         if(cy%4==0){
             for(let i=1;i<=29;i++){
-                    coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+                    coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
             }else{
                 for(let i=1;i<=28;i++){
-                    coupleDate.insertAdjacentHTML('beforeend',`<option value="dateSelect">${i}</option>`)};
+                    coupleDate.insertAdjacentHTML('beforeend',`<option value="${i}">${i}</option>`)};
             }
         
     }
 
 })
 
-    
+
 
 console.log(monthSelect);
 //년,월,일 입력한 값을 받아서 Date 객체 생성
@@ -107,16 +106,22 @@ function addContent(content){
 
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
-    console.log(coupleYear.value);
-    let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
-    let cardContent = `<div class="card">
+    if(coupleName.value == ''){
+        show(coupleNameWarn);   //입력 유효성 검사
+    }else{
+        remove(coupleNameWarn);
+        let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+        let cardContent = `<div class="card">
                             <div class = card-title>
                                 <h1 class="card-name">${coupleName.value}</h1>
                                 <div class="card-day">${coupleYear.value}년 ${coupleMonth.value}월 ${coupleDate.value}일</div>
                             </div>
                             <p class="card-txt">만난지 <span>${diffDate(coupleDay,today)}</span>일 째♥</p>
                         </div>`
-    addContent(cardContent);
+        addContent(cardContent);
+    }
+    
+    
     
     // for(i=100;i<1001;i+=100){
     //     console.log(날짜계산(coupleDay,i));
