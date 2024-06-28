@@ -28,6 +28,14 @@ coupleBtn.addEventListener('click',function(){
     remove(selectSection);
 })
 
+//시험 버튼 눌렀을 때 커플 모달창 보여주기
+let testBtn = document.getElementById('test-btn');
+let test = document.querySelector('.test')
+testBtn.addEventListener('click',function(){
+    show(test);
+    remove(selectSection);
+})
+
 //커플 모달창 입력 값 제출 시
 let addTxt = document.querySelector('.add-txt');
 let card = document.querySelector('.card');
@@ -53,7 +61,6 @@ for(let i=currentYear;i>=1920;i--){
 }
 for(let i=1;i<=12;i++){
         coupleMonth.insertAdjacentHTML('beforeend',`<option value="${i}" class="month-Select">${i}</option>`) 
-        let monthSelect = document.querySelectorAll('.month-Select');
 }
    
 
@@ -112,6 +119,7 @@ function addContent(content){
 coupleSubmitBtn.addEventListener('click',function(e){
     e.preventDefault();
     let coupleDay = createDate(coupleYear,coupleMonth,coupleDate);
+    console.log(coupleDate);
     let cardContent = `<div class="card">
                             <div class = card-title>
                                 <h1 class="card-name">${coupleName.value}</h1>
@@ -130,15 +138,17 @@ coupleSubmitBtn.addEventListener('click',function(e){
         addContent(cardContent);
     }
     
-    //만약 diffDate(today,coupleDay) 가 음수면 경고 (미래일때)
+
     
     // for(i=100;i<1001;i+=100){
     //     console.log(날짜계산(coupleDay,i));
     //   }
+    console.log(coupleDay);
+    console.log(calcAnniversary(coupleDay,100));
     
 })
 
-function 날짜계산(anniver,num){
+function calcAnniversary(anniver,num){
     let now1 = new Date(anniver);	// 현재 날짜 및 시간
     let fulldate = new Date(now1.setDate(now1.getDate() + (num-1)));
     let year = fulldate.getFullYear();
